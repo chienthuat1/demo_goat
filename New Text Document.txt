@@ -1,0 +1,25 @@
+# Stage build
+FROM eclipse-temurin:21-jdk AS build
+WORKDIR /app
+
+# Copy toàn bộ source code
+COPY . .
+
+# Gán quyền cho gradlew (nếu chưa có quyền execute)
+RUN chmod +x ./gradlew
+
+# Build file jar (bỏ test)
+RUN ./gradlew bootJar -x test
+
+# Stage chạy app
+FROM eclipse-temurin:21-jre
+WORKDIR /app
+
+# Copy file jar từ stage build
+COPY --from=build /app/build/libs/*.jar app.jar
+
+# Mở port cho Render
+EXPOSE 8080
+
+# Chạy app
+ENTRYPOINT ["java", "-jar", "app.jar"]
