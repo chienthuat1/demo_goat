@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>QR Code Con Dê</title>
+</head>
+<body>
+<h1>QR Code Con Dê</h1>
+
+<label for="goatId">Nhập ID dê:</label>
+<input type="text" id="goatId" placeholder="Ví dụ: D24080123">
+<button onclick="loadQRCode()">Xem QR</button>
+
+<div id="qrContainer" style="margin-top: 20px;">
+    <img id="qrImage" style="display:none; border: 1px solid #ccc; padding: 5px;">
+</div>./gradlew clean build
+
+
+<script>
+    function loadQRCode() {
+        const goatId = document.getElementById("goatId").value.trim();
+        if (!goatId) {
+            alert("Vui lòng nhập ID dê");
+            return;
+        }
+
+        const qrUrl = `http://localhost:8080/goats/${goatId}/qr`; // API của mày
+        const img = document.getElementById("qrImage");
+        img.src = qrUrl;
+        img.style.display = "block";
+    }
+</script>
+</body>
+</html>
