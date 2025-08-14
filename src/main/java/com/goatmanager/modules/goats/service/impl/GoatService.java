@@ -9,14 +9,12 @@ import com.goatmanager.modules.goats.dto.responsedto.GoatResponseDto;
 import com.goatmanager.modules.goats.entity.Goats;
 import com.goatmanager.modules.goats.enum_.enum_goats;
 import com.goatmanager.modules.goats.repository.GoatRepository;
-import com.google.zxing.qrcode.QRCodeReader;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+
+import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -85,5 +83,10 @@ public class GoatService
         String url = "http://localhost:8080/goats/view/" + goats.getId_goat();
         byte[] qrimg = qr_Goats.generateQrCode(url,200,200);
         return qrimg;
+    }
+    @PostConstruct
+    public void debugEnv() {
+        System.out.println("DB URL: " + System.getenv("SPRING_DATASOURCE_URL"));
+        System.out.println("DB USER: " + System.getenv("SPRING_DATASOURCE_USERNAME"));
     }
 }
