@@ -24,7 +24,7 @@
             return;
         }
 
-        const qrUrl = `http://localhost:8080/goats/${goatId}/qr`; // API của mày
+        const qrUrl = `https://demo-goat.onrender.com/goats/${goatId}/qr`; // API của mày
         const img = document.getElementById("qrImage");
         img.src = qrUrl;
         img.style.display = "block";

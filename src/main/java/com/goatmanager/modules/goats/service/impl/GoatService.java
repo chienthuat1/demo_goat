@@ -84,11 +84,5 @@ public class GoatService
         byte[] qrimg = qr_Goats.generateQrCode(url,200,200);
         return qrimg;
     }
-    @PostConstruct
-    public void debugEnv() {
-        System.out.println("SPRING_DATASOURCE_URL = " + System.getenv("SPRING_DATASOURCE_URL"));
-        System.out.println("SPRING_DATASOURCE_USERNAME = " + System.getenv("SPRING_DATASOURCE_USERNAME"));
-        System.out.println("SPRING_DATASOURCE_PASSWORD = " + System.getenv("SPRING_DATASOURCE_PASSWORD"));
-        System.out.println("test here");
-    }
+
 }
