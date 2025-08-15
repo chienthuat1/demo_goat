@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/index")
 public class Controll {
-    @GetMapping
+    @GetMapping("/demo")
     public String index() {
         return "demo";
     }
-    @GetMapping
+    @GetMapping("/info-goats")
     public String index2() {
         return "goats";
     }
