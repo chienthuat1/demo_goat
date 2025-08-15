@@ -2,26 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Goat Details</title>
     <style>
         body {
-            background: #f4f4f9;
             font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
         }
         #goatCard {
-            max-width: 500px;
+            max-width: 600px;
             margin: 50px auto;
-            padding: 25px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
             background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             text-align: center;
         }
         #goatCard img {
             max-width: 100%;
-            border-radius: 8px;
-            margin-bottom: 15px;
+            border-radius: 12px;
+        }
+        .qr-code {
+            width: 150px;
+            height: 150px;
+            margin-top: 15px;
         }
         .status {
             color: green;
@@ -31,14 +37,8 @@
             color: red;
             font-weight: bold;
         }
-        .qr-code {
-            width: 150px;
-            margin-top: 15px;
-        }
-        h1 {
-            margin-bottom: 10px;
-        }
         p {
+            font-size: 16px;
             margin: 6px 0;
         }
     </style>
@@ -47,7 +47,7 @@
 <div id="goatCard">Loading goat data...</div>
 
 <script>
-    // Lấy id từ URL
+    // Lấy id từ URL: ?id=1001
     const urlParams = new URLSearchParams(window.location.search);
     const goatId = urlParams.get('id');
     const apiUrl = `https://demo-goat.onrender.com/goats/view/${goatId}`;

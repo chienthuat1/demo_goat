@@ -10,4 +10,8 @@ public class Controll {
     public String index() {
         return "demo";
     }
+    @GetMapping
+    public String index2() {
+        return "goats";
+    }
 }
