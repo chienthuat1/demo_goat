@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Goat Details</title>
+    <style>
+        body {
+            background: #f4f4f9;
+            font-family: Arial, sans-serif;
+        }
+        #goatCard {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 25px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            background: #fff;
+            text-align: center;
+        }
+        #goatCard img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .status {
+            color: green;
+            font-weight: bold;
+        }
+        .inactive {
+            color: red;
+            font-weight: bold;
+        }
+        .qr-code {
+            width: 150px;
+            margin-top: 15px;
+        }
+        h1 {
+            margin-bottom: 10px;
+        }
+        p {
+            margin: 6px 0;
+        }
+    </style>
+</head>
+<body>
+<div id="goatCard">Loading goat data...</div>
+
+<script>
+    // Lấy id từ URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const goatId = urlParams.get('id');
+    const apiUrl = `https://demo-goat.onrender.com/goats/view/${goatId}`;
+
+    async function fetchGoat() {
+        try {
+            const res = await fetch(apiUrl);
+            if (!res.ok) throw new Error("Network response was not ok");
+
+            const data = await res.json();
+
+            if (!data || !data.id_goat) {
+                document.getElementById('goatCard').innerHTML = "Goat not found.";
+                return;
+            }
+
+            displayGoat(data);
+        } catch (err) {
+            document.getElementById('goatCard').innerHTML = "Error loading goat data.";
+            console.error(err);
+        }
+    }
+
+    function displayGoat(goat) {
+        const genderText = goat.gender ? "Male" : "Female";
+        const statusClass = goat.active ? "status" : "inactive";
+        const statusText = goat.status;
+
+        const html = `
+                <img src="${goat.img_url}" alt="Goat Image">
+                <h1>Goat ID: ${goat.id_goat}</h1>
+                <p><strong>Gender:</strong> ${genderText}</p>
+                <p><strong>Birthday:</strong> ${goat.birthday}</p>
+                <p><strong>Status:</strong> <span class="${statusClass}">${statusText}</span></p>
+                <p><strong>Weight:</strong> ${goat.weight} kg</p>
+                <p><strong>Description:</strong> ${goat.description}</p>
+                <img class="qr-code" src="${goat.qr_code}" alt="QR Code">
+            `;
+        document.getElementById('goatCard').innerHTML = html;
+    }
+    fetchGoat();
+</script>
+</body>
+</html>
