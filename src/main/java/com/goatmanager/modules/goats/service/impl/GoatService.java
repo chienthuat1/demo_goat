@@ -86,7 +86,9 @@ public class GoatService
     }
     @PostConstruct
     public void debugEnv() {
-        System.out.println("DB URL: " + System.getenv("SPRING_DATASOURCE_URL"));
-        System.out.println("DB USER: " + System.getenv("SPRING_DATASOURCE_USERNAME"));
+        System.out.println("SPRING_DATASOURCE_URL = " + System.getenv("SPRING_DATASOURCE_URL"));
+        System.out.println("SPRING_DATASOURCE_USERNAME = " + System.getenv("SPRING_DATASOURCE_USERNAME"));
+        System.out.println("SPRING_DATASOURCE_PASSWORD = " + System.getenv("SPRING_DATASOURCE_PASSWORD"));
+        System.out.println("test here");
     }
 }
