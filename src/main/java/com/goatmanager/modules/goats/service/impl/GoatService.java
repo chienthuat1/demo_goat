@@ -80,7 +80,7 @@ public class GoatService
         Goats goats = goatRepository.findById(id).orElseThrow(
                 () -> new GoatNotFoudException("Goat Not Found")
         );
-        String url = "https://demo-goat.onrender.com/info-goats?id=" + goats.getId_goat();
+        String url = "https://demo-goat.onrender.com/index/info-goats?id="+goats.getId_goat();
         byte[] qrimg = qr_Goats.generateQrCode(url,200,200);
         return qrimg;
     }
