@@ -1,8 +1,10 @@
 package com.goatmanager.controller;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+@CrossOrigin(origins = "*")
 @Controller
 @RequestMapping("/index")
 public class Controll {
@@ -13,5 +15,9 @@ public class Controll {
     @GetMapping("/info-goats")
     public String index2() {
         return "goats";
+    }
+    @GetMapping("/animal")
+    public String index3() {
+        return "test";
     }
 }

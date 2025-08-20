@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Chi tiết: Dê (Goat)</title>
+  <style>
+    :root{
+      --bg:#0b1020; --card:#0f1630; --muted:#9fb0ff; --text:#e9edf8; --accent:#6c8cff;
+      --glass: rgba(255,255,255,0.04);
+      --ok:#21d19f; --warn:#ffb020; --danger:#ff6b6b;
+      --rounded:18px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0; font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background: radial-gradient(900px 400px at 10% -10%, #162042 0%, transparent 35%), linear-gradient(180deg,#071026 0%, #041024 100%), var(--bg); color:var(--text); -webkit-font-smoothing:antialiased}
+
+    .wrap{max-width:1100px; margin:36px auto; padding:20px}
+    header{display:flex; align-items:center; gap:18px; margin-bottom:18px}
+    header h1{font-size:22px; margin:0}
+    header p{margin:0; color:var(--muted); font-size:13px}
+
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.06); border-radius:var(--rounded); overflow:hidden; box-shadow: 0 12px 30px rgba(2,6,23,.6)}
+
+    .grid{display:grid; grid-template-columns: 1fr 1fr; gap:18px}
+    @media (max-width:900px){ .grid{grid-template-columns:1fr} }
+
+    .hero{position:relative; min-height:380px; overflow:hidden}
+    .hero img{width:100%; height:100%; object-fit:cover; display:block}
+    .hero .overlay{position:absolute; left:18px; bottom:18px; background:linear-gradient(90deg, rgba(0,0,0,0.45), rgba(0,0,0,0.25)); padding:10px 14px; border-radius:12px; border:1px solid rgba(255,255,255,0.06)}
+    .hero .overlay h2{margin:0; font-size:20px}
+    .hero .overlay em{color:var(--muted); font-style:italic; font-size:13px}
+
+    .content{padding:22px}
+    .meta-row{display:flex; gap:8px; flex-wrap:wrap; margin:8px 0 16px}
+    .pill{background:var(--glass); padding:8px 12px; border-radius:999px; border:1px solid rgba(255,255,255,0.06); font-size:13px}
+
+    .desc{color:#d7def6; line-height:1.6}
+
+    .info{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px; margin-top:18px}
+    .info div{background:rgba(255,255,255,0.02); padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,0.03)}
+    .label{font-size:13px; color:var(--muted)}
+    .value{font-weight:700}
+
+    .status{display:inline-block; padding:6px 10px; border-radius:999px; font-weight:700}
+    .status.ok{background:linear-gradient(180deg, rgba(33,209,159,0.12), rgba(33,209,159,0.06)); color:var(--ok); border:1px solid rgba(33,209,159,0.12)}
+    .status.warn{background:linear-gradient(180deg, rgba(255,176,32,0.09), rgba(255,176,32,0.04)); color:var(--warn); border:1px solid rgba(255,176,32,0.08)}
+    .status.danger{background:linear-gradient(180deg, rgba(255,107,107,0.09), rgba(255,107,107,0.04)); color:var(--danger); border:1px solid rgba(255,107,107,0.08)}
+
+    .actions{display:flex; gap:10px; margin-top:18px}
+    .btn{padding:10px 14px; border-radius:12px; border:1px solid rgba(255,255,255,0.06); background:transparent; color:var(--text); cursor:pointer}
+    .btn.primary{background:linear-gradient(180deg,var(--accent), #5771ff); color:#08102a; border:0; font-weight:700}
+    .btn.ghost{background:transparent; border:1px solid rgba(255,255,255,0.08)}
+
+    .gallery{display:flex; gap:8px; margin-top:14px}
+    .gallery img{width:100%; height:110px; object-fit:cover; border-radius:10px}
+
+    footer{color:var(--muted); text-align:center; margin:24px 0 40px}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Thông tin chi tiết</h1>
+      <p>Goat — Dê (Capra aegagrus hircus)</p>
+    </div>
+  </header>
+
+  <main class="card">
+    <div style="padding:18px">
+      <div class="grid">
+
+        <!-- Left: hero image -->
+        <div class="hero" aria-hidden>
+          <img src="https://images.unsplash.com/photo-1589441088285-3ca0f2eb3f06?q=80&w=1600&auto=format&fit=crop" alt="Goat">
+          <div class="overlay">
+            <h2>Goat <small style="opacity:.9">(Dê)</small></h2>
+            <div style="height:6px"></div>
+            <em>Capra aegagrus hircus — Loài gia súc nuôi phổ biến</em>
+          </div>
+        </div>
+
+        <!-- Right: details -->
+        <div class="content">
+          <div class="meta-row">
+            <div class="pill">Môi trường: <strong style="margin-left:6px">Đồng cỏ · Núi · Trang trại</strong></div>
+            <div class="pill">Chế độ ăn: <strong style="margin-left:6px">Thực vật (cỏ, lá)</strong></div>
+            <div class="pill">Loài: <strong style="margin-left:6px">Mammal</strong></div>
+          </div>
+
+          <p class="desc">Dê là loài động vật được con người thuần hóa từ lâu, thường nuôi để lấy sữa, thịt và da. Chúng có khả năng thích nghi tốt với nhiều môi trường, ăn được nhiều loại thực vật, và thường thân thiện khi đã được thuần dưỡng. Dê cũng có vai trò kinh tế ở nhiều vùng nông thôn.</p>
+
+          <div class="info" role="list">
+            <div role="listitem">
+              <div class="label">Tuổi thọ</div>
+              <div class="value">10 – 18 năm</div>
+            </div>
+            <div role="listitem">
+              <div class="label">Kích thước</div>
+              <div class="value">Cân nặng 20 – 140 kg (tùy giống)</div>
+            </div>
+            <div role="listitem">
+              <div class="label">Tập tính</div>
+              <div class="value">Bầy đàn, hiền lành, tò mò</div>
+            </div>
+            <div role="listitem">
+              <div class="label">Tình trạng bảo tồn</div>
+              <div class="value"><span class="status ok">Phổ biến</span></div>
+            </div>
+          </div>
+
+          <div class="gallery" aria-hidden>
+            <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=800&auto=format&fit=crop" alt="Goat in field">
+            <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=800&auto=format&fit=crop" alt="Cute goat">
+            <img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?q=80&w=800&auto=format&fit=crop" alt="Goat closeup">
+          </div>
+
+          <div class="actions">
+            <button class="btn ghost" onclick="history.back()">← Quay lại</button>
+            <button class="btn" onclick="shareInfo()">Chia sẻ</button>
+            <button class="btn primary" onclick="favorite()">Yêu thích</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    Thiết kế giống phong cách Animal Cards — có thể chỉnh sửa nội dung, ảnh, hoặc chuyển thành trang động.
+  </footer>
+</div>
+<script>
+  function favorite(){
+    alert('Đã thêm vào danh sách yêu thích ❤️');
+  }
+  function shareInfo(){
+    if(navigator.share){
+      navigator.share({title:'Thông tin: Dê', text:'Xem thông tin chi tiết về Dê (Goat)', url:location.href}).catch(()=>{});
+    } else {
+      prompt('Copy link để chia sẻ:', location.href);
+    }
+  }
+</script>
+</body>
+</html>

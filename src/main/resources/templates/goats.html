@@ -47,18 +47,14 @@
 <div id="goatCard">Loading goat data...</div>
 
 <script>
-    // Lấy id từ URL: ?id=1001
     const urlParams = new URLSearchParams(window.location.search);
     const goatId = urlParams.get('id');
-    const apiUrl = `https://demo-goat.onrender.com/goats/view/${goatId}`;
-
+        const apiUrl = `/goats/view/${goatId}`;
     async function fetchGoat() {
         try {
             const res = await fetch(apiUrl);
             if (!res.ok) throw new Error("Network response was not ok");
-
             const data = await res.json();
-
             if (!data || !data.id_goat) {
                 document.getElementById('goatCard').innerHTML = "Goat not found.";
                 return;
@@ -70,7 +66,6 @@
             console.error(err);
         }
     }
-
     function displayGoat(goat) {
         const genderText = goat.gender ? "Male" : "Female";
         const statusClass = goat.active ? "status" : "inactive";

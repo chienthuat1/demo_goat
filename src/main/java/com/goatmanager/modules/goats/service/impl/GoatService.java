@@ -12,6 +12,7 @@ import com.goatmanager.modules.goats.repository.GoatRepository;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -31,6 +32,7 @@ public class GoatService
         this.goatRepository = goatRepository;
         this.goatMapper = goatMapper;
         qr_Goats = qrGoats;
+
     }
     //Check Goat
     public boolean checkGoat(Long id) {
@@ -48,6 +50,7 @@ public class GoatService
     //find id
     public Optional<GoatResponseDto> getGoatById(Long id) {
         Optional<Goats> goats = goatRepository.findById(id);
+
         return goats.map(goatMapper::toGoatResponseDto);
     }
 

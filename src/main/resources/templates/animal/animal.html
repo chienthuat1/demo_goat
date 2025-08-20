@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Animal Cards</title>
+    <style>
+        :root{
+            --bg: #0b1020;
+            --card:#121935;
+            --muted:#9fb0ff;
+            --text:#e9edff;
+            --accent:#6c8cff;
+            --ok:#21d19f;
+            --warn:#ffb020;
+            --danger:#ff6b6b;
+            --shadow: 0 10px 25px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.04);
+        }
+        *{box-sizing:border-box}
+        body{
+            margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+            color:var(--text); background: radial-gradient(1200px 600px at 10% -10%, #1b2450 0%, transparent 40%), radial-gradient(1000px 500px at 110% 10%, #1b2450 0%, transparent 35%), var(--bg);
+            min-height:100svh;
+        }
+        header{
+            position:sticky; top:0; z-index:2; backdrop-filter:saturate(150%) blur(6px);
+            background:linear-gradient(to bottom, rgba(11,16,32,.9), rgba(11,16,32,.6));
+            border-bottom:1px solid rgba(255,255,255,.06);
+        }
+        .wrap{max-width:1100px; margin:auto; padding:20px}
+        h1{margin:0 0 6px; font-size:28px; letter-spacing:.3px}
+        .sub{margin:0 0 14px; color:var(--muted); font-size:14px}
+        .toolbar{display:flex; gap:10px; flex-wrap:wrap}
+        .search{
+            flex:1 1 260px; display:flex; align-items:center; gap:8px; background:rgba(255,255,255,.06);
+            border:1px solid rgba(255,255,255,.08); border-radius:14px; padding:10px 12px; box-shadow:var(--shadow)
+        }
+        .search input{flex:1; background:transparent; border:0; outline:none; color:var(--text); font-size:14px}
+        .chip{padding:8px 12px; border-radius:999px; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.04); cursor:pointer; user-select:none; font-size:13px}
+        .chip.active{background:var(--accent); border-color:transparent; color:#0c1230; font-weight:600}
+
+        .grid{display:grid; grid-template-columns: repeat( auto-fit, minmax(240px, 1fr) ); gap:18px; padding:22px 20px 50px}
+
+        .card{
+            border-radius:18px; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+            border:1px solid rgba(255,255,255,.08); overflow:hidden; box-shadow:var(--shadow); display:flex; flex-direction:column
+        }
+        .media{position:relative; aspect-ratio: 16/10; overflow:hidden}
+        .media img{width:100%; height:100%; object-fit:cover; display:block; filter:saturate(1.05)}
+        .badge{position:absolute; left:10px; top:10px; padding:6px 10px; font-size:12px; border-radius:999px; background:rgba(0,0,0,.5); border:1px solid rgba(255,255,255,.14)}
+        .content{padding:14px 14px 6px}
+        .title{font-size:18px; margin:0 0 4px}
+        .meta{margin:0 0 10px; color:var(--muted); font-size:12px}
+
+        .pill-row{display:flex; flex-wrap:wrap; gap:8px; margin:0 0 10px}
+        .pill{font-size:12px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1)}
+
+        .list{display:grid; gap:8px; font-size:13px; margin:8px 0 12px}
+        .list div{display:flex; justify-content:space-between; gap:10px}
+        .list span{opacity:.9}
+        .status{font-weight:600}
+        .status.ok{color:var(--ok)}
+        .status.warn{color:var(--warn)}
+        .status.danger{color:var(--danger)}
+
+        .actions{display:flex; gap:10px; padding:10px 14px 16px; margin-top:auto}
+        .btn{flex:1; text-align:center; padding:10px 12px; border-radius:12px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); color:var(--text); cursor:pointer; user-select:none}
+        .btn.primary{background:linear-gradient(180deg, var(--accent), #5672ff); color:#0b1020; border:0; font-weight:700}
+
+        footer{color:#9fb0ff80; font-size:12px; text-align:center; padding:30px}
+    </style>
+</head>
+<body>
+<header>
+    <div class="wrap">
+        <h1>Animal Cards</h1>
+        <p class="sub">Trang HTML mẫu hiển thị các thẻ (card) thông tin về động vật. Có ô tìm kiếm và lọc theo môi trường sống.</p>
+        <div class="toolbar">
+            <div class="search">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 21l-3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.6"/></svg>
+                <input id="q" type="search" placeholder="Tìm theo tên, loài, thức ăn... (ví dụ: goat, cat, grass)">
+            </div>
+            <div class="chip-group">
+                <span class="chip active" data-filter="all">Tất cả</span>
+                <span class="chip" data-filter="savanna">Savanna</span>
+                <span class="chip" data-filter="forest">Forest</span>
+                <span class="chip" data-filter="ocean">Ocean</span>
+                <span class="chip" data-filter="farm">Farm</span>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="wrap">
+    <section class="grid" id="grid">
+        <!-- Goat -->
+        <article class="card" data-name="Goat" data-species="Capra aegagrus hircus" data-diet="herbivore grass leaves" data-habitat="farm" data-tags="mammal tame ruminant">
+            <div class="media">
+                <img alt="Goat" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop"/>
+                <span class="badge">Farm</span>
+            </div>
+            <div class="content">
+                <h2 class="title">Goat</h2>
+                <p class="meta"><em>Capra aegagrus hircus</em></p>
+                <div class="pill-row">
+                    <span class="pill">Ăn cỏ</span>
+                    <span class="pill">Nhai lại</span>
+                    <span class="pill">Hiền</span>
+                </div>
+                <div class="list">
+                    <div><span>Tuổi thọ</span><strong>10–18 năm</strong></div>
+                    <div><span>Chế độ ăn</span><strong>Cỏ, lá</strong></div>
+                    <div><span>Tình trạng</span><strong class="status ok">Thuần hóa</strong></div>
+                </div>
+            </div>
+            <div class="actions">
+                <button class="btn" onclick="more(this)">Chi tiết</button>
+                <button class="btn primary" onclick="alert('Bé dê đáng iu 🐐')">Yêu thích</button>
+            </div>
+        </article>
+
+        <!-- Cat -->
+        <article class="card" data-name="Cat" data-species="Felis catus" data-diet="carnivore fish meat" data-habitat="forest" data-tags="mammal pet agile">
+            <div class="media">
+                <img alt="Cat" src="https://images.unsplash.com/photo-1511044568932-338cba0ad803?q=80&w=1200&auto=format&fit=crop"/>
+                <span class="badge">Forest / Urban</span>
+            </div>
+            <div class="content">
+                <h2 class="title">Cat</h2>
+                <p class="meta"><em>Felis catus</em></p>
+                <div class="pill-row">
+                    <span class="pill">Săn mồi</span>
+                    <span class="pill">Nhanh nhẹn</span>
+                    <span class="pill">Thú cưng</span>
+                </div>
+                <div class="list">
+                    <div><span>Tuổi thọ</span><strong>12–18 năm</strong></div>
+                    <div><span>Chế độ ăn</span><strong>Thịt, cá</strong></div>
+                    <div><span>Tình trạng</span><strong class="status ok">Phổ biến</strong></div>
+                </div>
+            </div>
+            <div class="actions">
+                <button class="btn" onclick="more(this)">Chi tiết</button>
+                <button class="btn primary">Yêu thích</button>
+            </div>
+        </article>
+
+        <!-- Dog -->
+        <article class="card" data-name="Dog" data-species="Canis lupus familiaris" data-diet="omnivore meat kibble" data-habitat="forest" data-tags="mammal pet loyal">
+            <div class="media">
+                <img alt="Dog" src="https://images.unsplash.com/photo-1507149833265-60c372daea22?q=80&w=1200&auto=format&fit=crop"/>
+                <span class="badge">Forest / Urban</span>
+            </div>
+            <div class="content">
+                <h2 class="title">Dog</h2>
+                <p class="meta"><em>Canis lupus familiaris</em></p>
+                <div class="pill-row">
+                    <span class="pill">Trung thành</span>
+                    <span class="pill">Huấn luyện</span>
+                    <span class="pill">Thú cưng</span>
+                </div>
+                <div class="list">
+                    <div><span>Tuổi thọ</span><strong>10–15 năm</strong></div>
+                    <div><span>Chế độ ăn</span><strong>Hỗn hợp</strong></div>
+                    <div><span>Tình trạng</span><strong class="status ok">Phổ biến</strong></div>
+                </div>
+            </div>
+            <div class="actions">
+                <button class="btn" onclick="more(this)">Chi tiết</button>
+                <button class="btn primary">Yêu thích</button>
+            </div>
+        </article>
+
+        <!-- Elephant -->
+        <article class="card" data-name="Elephant" data-species="Loxodonta africana" data-diet="herbivore leaves bark" data-habitat="savanna" data-tags="mammal giant tusk">
+            <div class="media">
+                <img alt="Elephant" src="https://images.unsplash.com/photo-1508672019048-805c876b67e2?q=80&w=1200&auto=format&fit=crop"/>
+                <span class="badge">Savanna</span>
+            </div>
+            <div class="content">
+                <h2 class="title">Elephant</h2>
+                <p class="meta"><em>Loxodonta africana</em></p>
+                <div class="pill-row">
+                    <span class="pill">To lớn</span>
+                    <span class="pill">Bầy đàn</span>
+                    <span class="pill">Thông minh</span>
+                </div>
+                <div class="list">
+                    <div><span>Tuổi thọ</span><strong>60–70 năm</strong></div>
+                    <div><span>Chế độ ăn</span><strong>Lá, vỏ cây</strong></div>
+                    <div><span>Tình trạng</span><strong class="status warn">Nguy cấp (vừa)</strong></div>
+                </div>
+            </div>
+            <div class="actions">
+                <button class="btn" onclick="more(this)">Chi tiết</button>
+                <button class="btn primary">Yêu thích</button>
+            </div>
+        </article>
+
+        <!-- Dolphin -->
+        <article class="card" data-name="Dolphin" data-species="Delphinus delphis" data-diet="carnivore fish squid" data-habitat="ocean" data-tags="marine smart playful">
+            <div class="media">
+                <img alt="Dolphin" src="https://images.unsplash.com/photo-1504600770771-fb03a6961d33?q=80&w=1200&auto=format&fit=crop"/>
+                <span class="badge">Ocean</span>
+            </div>
+            <div class="content">
+                <h2 class="title">Dolphin</h2>
+                <p class="meta"><em>Delphinus delphis</em></p>
+                <div class="pill-row">
+                    <span class="pill">Thông minh</span>
+                    <span class="pill">Xã hội</span>
+                    <span class="pill">Bơi nhanh</span>
+                </div>
+                <div class="list">
+                    <div><span>Tuổi thọ</span><strong>20–45 năm</strong></div>
+                    <div><span>Chế độ ăn</span><strong>Cá, mực</strong></div>
+                    <div><span>Tình trạng</span><strong class="status ok">Bảo tồn</strong></div>
+                </div>
+            </div>
+            <div class="actions">
+                <button class="btn" onclick="more(this)">Chi tiết</button>
+                <button class="btn primary">Yêu thích</button>
+            </div>
+        </article>
+
+        <!-- Panda -->
+        <article class="card" data-name="Giant Panda" data-species="Ailuropoda melanoleuca" data-diet="herbivore bamboo" data-habitat="forest" data-tags="bear bamboo china">
+            <div class="media">
+                <img alt="Panda" src="https://images.unsplash.com/photo-1552410260-0fd9b311fc00?q=80&w=1200&auto=format&fit=crop"/>
+                <span class="badge">Forest</span>
+            </div>
+            <div class="content">
+                <h2 class="title">Giant Panda</h2>
+                <p class="meta"><em>Ailuropoda melanoleuca</em></p>
+                <div class="pill-row">
+                    <span class="pill">Ăn tre</span>
+                    <span class="pill">Điềm tĩnh</span>
+                    <span class="pill">Biểu tượng</span>
+                </div>
+                <div class="list">
+                    <div><span>Tuổi thọ</span><strong>20–30 năm</strong></div>
+                    <div><span>Chế độ ăn</span><strong>Tre</strong></div>
+                    <div><span>Tình trạng</span><strong class="status warn">Dễ tổn thương</strong></div>
+                </div>
+            </div>
+            <div class="actions">
+                <button class="btn" onclick="more(this)">Chi tiết</button>
+                <button class="btn primary">Yêu thích</button>
+            </div>
+        </article>
+
+        <!-- Sea Turtle -->
+        <article class="card" data-name="Sea Turtle" data-species="Cheloniidae" data-diet="omnivore seagrass jellyfish" data-habitat="ocean" data-tags="marine reptile longlife">
+            <div class="media">
+                <img alt="Sea Turtle" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop"/>
+                <span class="badge">Ocean</span>
+            </div>
+            <div class="content">
+                <h2 class="title">Sea Turtle</h2>
+                <p class="meta"><em>Cheloniidae</em></p>
+                <div class="pill-row">
+                    <span class="pill">Sống thọ</span>
+                    <span class="pill">Di cư</span>
+                    <span class="pill">Bơi giỏi</span>
+                </div>
+                <div class="list">
+                    <div><span>Tuổi thọ</span><strong>50+ năm</strong></div>
+                    <div><span>Chế độ ăn</span><strong>Cỏ biển, sứa</strong></div>
+                    <div><span>Tình trạng</span><strong class="status danger">Nguy cấp</strong></div>
+                </div>
+            </div>
+            <div class="actions">
+                <button class="btn" onclick="more(this)">Chi tiết</button>
+                <button class="btn primary">Yêu thích</button>
+            </div>
+        </article>
+        <article class="card" data-name="Goat" data-species="Capra aegagrus hircus" data-diet="herbivore grass leaves" data-habitat="farm grassland mountain" data-tags="mammal livestock friendly">
+            <div class="media">
+                <img alt="Goat" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop"/>
+                <span class="badge">Đồng cỏ / Núi</span>
+            </div>
+            <div class="content">
+                <h2 class="title">Goat (Dê)</h2>
+                <p class="meta"><em>Capra aegagrus hircus</em></p>
+                <div class="pill-row">
+                    <span class="pill">Hiền lành</span>
+                    <span class="pill">Ăn cỏ</span>
+                    <span class="pill">Nuôi dễ</span>
+                </div>
+                <div class="list">
+                    <div><span>Tuổi thọ</span><strong>10–18 năm</strong></div>
+                    <div><span>Chế độ ăn</span><strong>Thực vật</strong></div>
+                    <div><span>Tình trạng</span><strong class="status ok">Phổ biến</strong></div>
+                </div>
+            </div>
+            <div class="actions">
+                <button class="btn" onclick="more(this)">Chi tiết</button>
+                <button class="btn primary">Yêu thích</button>
+            </div>
+        </article>
+
+    </section>
+</main>
+
+<footer>
+    Made with ❤ – bạn có thể đổi dữ liệu/ảnh theo dự án của mình.
+</footer>
+
+<script>
+    const q = document.getElementById('q');
+    const chips = document.querySelectorAll('.chip');
+    const grid = document.getElementById('grid');
+
+    function filter(){
+        const term = q.value.trim().toLowerCase();
+        const active = document.querySelector('.chip.active')?.dataset.filter || 'all';
+        const cards = [...grid.children];
+        cards.forEach(card => {
+            const haystack = (
+                card.dataset.name + ' ' +
+                card.dataset.species + ' ' +
+                card.dataset.diet + ' ' +
+                card.dataset.tags + ' ' +
+                card.dataset.habitat
+            ).toLowerCase();
+            const matchTerm = haystack.includes(term);
+            const matchHab = active === 'all' || card.dataset.habitat === active || card.querySelector('.badge').textContent.toLowerCase().includes(active);
+            card.style.display = (matchTerm && matchHab) ? '' : 'none';
+        })
+    }
+
+    q.addEventListener('input', filter);
+    chips.forEach(c => c.addEventListener('click', () => {
+        chips.forEach(x => x.classList.remove('active'));
+        c.classList.add('active');
+        filter();
+    }));
+
+    function more(btn){
+        const art = btn.closest('.card');
+        const name = art.dataset.name;
+        const species = art.dataset.species;
+        const diet = art.dataset.diet.replaceAll(' ', ', ');
+        const habitat = art.dataset.habitat;
+        alert(`${name} ( ${species} )\nHabitat: ${habitat}\nDiet: ${diet}`);
+    }
+
+    filter();
+</script>
+</body>
+</html>

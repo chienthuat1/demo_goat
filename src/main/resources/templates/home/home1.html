@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Trang trại chăn nuôi dê — Thuat's Goat Farm</title>
+    <style>
+        :root{
+            --bg:#f6fbf7; --card:#ffffff; --muted:#55606a; --accent:#2f855a; --accent-2:#68d391; --radius:14px;
+            --shadow: 0 10px 30px rgba(45,55,72,0.06);
+        }
+        *{box-sizing:border-box}
+        body{margin:0; font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:var(--bg); color:#0f1724}
+        .wrap{max-width:1100px; margin:28px auto; padding:20px}
+
+        header{display:flex; align-items:center; justify-content:space-between; gap:18px}
+        .brand{display:flex; align-items:center; gap:14px}
+        .logo{width:64px; height:64px; border-radius:12px; background:linear-gradient(135deg,var(--accent),var(--accent-2)); display:flex; align-items:center; justify-content:center; color:white; font-weight:800}
+        h1{margin:0; font-size:20px}
+        .tagline{color:var(--muted); font-size:13px}
+
+        .hero{display:grid; grid-template-columns: 1fr 420px; gap:20px; margin-top:18px}
+        @media(max-width:980px){ .hero{grid-template-columns:1fr} }
+
+        .card{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden}
+        .hero-card{padding:22px}
+        .hero-card p{color:var(--muted); line-height:1.6}
+
+        .hero-media{height:300px; background:url('https://images.unsplash.com/photo-1589441088285-3ca0f2eb3f06?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat}
+
+        .stats{display:flex; gap:12px; margin-top:14px}
+        .stat{flex:1; padding:12px; border-radius:12px; background:linear-gradient(180deg,#fff,#fbfffc); text-align:center}
+        .stat strong{display:block; font-size:20px}
+        .stat span{display:block; color:var(--muted); font-size:13px}
+
+        .grid{display:grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap:16px; margin-top:18px}
+
+        .animal-card{display:flex; flex-direction:column; height:100%}
+        .animal-media{height:160px; background-size:cover; background-position:center}
+        .animal-body{padding:12px; flex:1; display:flex; flex-direction:column}
+        .animal-title{margin:0 0 6px}
+        .animal-meta{font-size:13px; color:var(--muted); margin-bottom:8px}
+        .animal-footer{display:flex; gap:8px; margin-top:auto}
+        .btn{padding:8px 12px; border-radius:10px; border:1px solid rgba(15,23,42,0.06); background:white; cursor:pointer}
+        .btn.primary{background:linear-gradient(180deg,var(--accent),var(--accent-2)); color:white; border:0}
+
+        .aside{display:flex; flex-direction:column; gap:12px}
+        .contact{padding:14px}
+        .contact h3{margin:0 0 8px}
+        .contact p{margin:0 0 8px; color:var(--muted)}
+        .contact .meta{font-size:13px}
+
+        .map{height:180px; border-radius:10px; overflow:hidden}
+        .gallery{display:grid; grid-template-columns:repeat(3,1fr); gap:8px}
+        .gallery img{width:100%; height:80px; object-fit:cover; border-radius:8px}
+
+        footer{margin-top:22px; text-align:center; color:var(--muted); font-size:13px}
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <header>
+        <div class="brand">
+            <div class="logo">GF</div>
+            <div>
+                <h1>Trang trại chăn nuôi dê Thuat's Goat Farm</h1>
+                <div class="tagline">Chuyên nuôi, nhân giống và sản xuất sản phẩm từ dê</div>
+            </div>
+        </div>
+        <div style="display:flex; gap:10px; align-items:center">
+            <div style="text-align:right">
+                <div style="font-weight:700">Giờ mở cửa</div>
+                <div class="tagline">Hàng ngày · 06:00 - 18:00</div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="card hero-card">
+            <div class="hero-media" role="img" aria-label="Ảnh đàn dê"></div>
+            <h2 style="margin:12px 0 6px">Chăn nuôi, nhân giống và chế biến sản phẩm từ dê</h2>
+            <p>Trang trại chuyên về các giống dê sữa và dê thịt: chăm sóc đàn, huấn luyện, cho khách tham quan trải nghiệm vắt sữa, cho ăn, và mua sản phẩm tươi.</p>
+
+            <div class="stats">
+                <div class="stat"><strong>240</strong><span>Số lượng dê</span></div>
+                <div class="stat"><strong>4</strong><span>Giống chính</span></div>
+                <div class="stat"><strong>120 L</strong><span>Sữa/ngày (tổng)</span></div>
+            </div>
+
+            <div style="margin-top:14px; display:flex; gap:10px">
+                <button class="btn primary" onclick="location.href='#animals'">Xem giống dê</button>
+                <button class="btn" onclick="location.href='#visit'">Đặt lịch tham quan</button>
+            </div>
+        </div>
+
+        <aside class="aside">
+            <div class="card contact">
+                <h3>Liên hệ</h3>
+                <p class="meta">Địa chỉ: 123 Xã Nông Nghiệp, Huyện Nuôi Dê</p>
+                <p class="meta">SĐT: 0909-THUAT</p>
+                <p class="meta">Email: goatfarm@example.com</p>
+
+                <div style="margin-top:8px">
+                    <strong>Sản phẩm</strong>
+                    <div class="tagline">Sữa tươi, phô mai nhẹ, thịt dê, da sạch</div>
+                </div>
+            </div>
+
+            <div class="card map">
+                <!-- static map placeholder -->
+                <iframe width="100%" height="180" frameborder="0" style="border:0" src="https://www.google.com/maps?q=Tra+Vinh&output=embed"></iframe>
+            </div>
+
+            <div class="card" style="padding:12px">
+                <h4 style="margin:0 0 8px">Hình ảnh trang trại</h4>
+                <div class="gallery">
+                    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=800&auto=format&fit=crop" alt="">
+                    <img src="https://images.unsplash.com/photo-1589441088285-3ca0f2eb3f06?q=80&w=800&auto=format&fit=crop" alt="">
+                    <img src="https://images.unsplash.com/photo-1507149833265-60c372daea22?q=80&w=800&auto=format&fit=crop" alt="">
+                </div>
+            </div>
+        </aside>
+    </section>
+
+    <section id="animals" style="margin-top:18px">
+        <h3>Giống dê tại trang trại</h3>
+        <div class="grid">
+            <!-- Boer Goat -->
+            <div class="card animal-card">
+                <div class="animal-media" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop')"></div>
+                <div class="animal-body">
+                    <h4 class="animal-title">Boer Goat</h4>
+                    <div class="animal-meta">Giống dê thịt · Cân nặng lớn</div>
+                    <p style="color:var(--muted); font-size:14px; margin:6px 0 10px">Boer là giống dê thịt phổ biến, lớn nhanh và thịt ngon.</p>
+                    <div class="animal-footer">
+                        <button class="btn" onclick="location.href='goat-detail.html?breed=boer'">Chi tiết</button>
+                        <button class="btn primary" onclick="alert('Yêu cầu mua giống — demo')">Mua giống</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Saanen (sữa) -->
+            <div class="card animal-card">
+                <div class="animal-media" style="background-image:url('https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=1200&auto=format&fit=crop')"></div>
+                <div class="animal-body">
+                    <h4 class="animal-title">Saanen</h4>
+                    <div class="animal-meta">Giống dê sữa · Năng suất cao</div>
+                    <p style="color:var(--muted); font-size:14px; margin:6px 0 10px">Saanen nổi tiếng cho sữa nhiều, phù hợp làm sữa tươi và chế biến.</p>
+                    <div class="animal-footer">
+                        <button class="btn" onclick="location.href='goat-detail.html?breed=saanen'">Chi tiết</button>
+                        <button class="btn primary" onclick="alert('Đặt mua sữa tươi — demo')">Đặt mua</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mountain / Native -->
+            <div class="card animal-card">
+                <div class="animal-media" style="background-image:url('https://images.unsplash.com/photo-1507149833265-60c372daea22?q=80&w=1200&auto=format&fit=crop')"></div>
+                <div class="animal-body">
+                    <h4 class="animal-title">Dê bản địa</h4>
+                    <div class="animal-meta">Giống nuôi truyền thống · Thích nghi tốt</div>
+                    <p style="color:var(--muted); font-size:14px; margin:6px 0 10px">Dê địa phương dễ nuôi, chịu đựng thời tiết và ăn cỏ tốt.</p>
+                    <div class="animal-footer">
+                        <button class="btn" onclick="location.href='goat-detail.html?breed=native'">Chi tiết</button>
+                        <button class="btn primary" onclick="alert('Tư vấn nuôi dê bản địa')">Tư vấn</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kids / Pet -->
+            <div class="card animal-card">
+                <div class="animal-media" style="background-image:url('https://images.unsplash.com/photo-1508672019048-805c876b67e2?q=80&w=1200&auto=format&fit=crop')"></div>
+                <div class="animal-body">
+                    <h4 class="animal-title">Dê con (Kids)</h4>
+                    <div class="animal-meta">Thân thiện · Dành cho trải nghiệm</div>
+                    <p style="color:var(--muted); font-size:14px; margin:6px 0 10px">Dê con thường hiền và được trẻ em yêu thích khi tham quan.</p>
+                    <div class="animal-footer">
+                        <button class="btn" onclick="location.href='goat-detail.html?breed=kid'">Chi tiết</button>
+                        <button class="btn primary" onclick="alert('Đặt combo cho trẻ em')">Đặt combo</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="visit" style="margin-top:18px">
+        <h3>Đặt lịch tham quan & hoạt động</h3>
+        <div class="card" style="padding:16px; margin-top:8px; display:flex; gap:12px; flex-wrap:wrap; align-items:center">
+            <div style="flex:1; min-width:240px">
+                <p class="tagline">Chúng tôi có tour tham quan, trải nghiệm vắt sữa, cho dê ăn và mua sản phẩm tươi. Chọn ngày, số lượng và dịch vụ.</p>
+            </div>
+            <div style="display:flex; gap:8px">
+                <button class="btn" onclick="prompt('Gọi số để đặt: 0909-THUAT')">Đặt qua điện thoại</button>
+                <button class="btn primary" onclick="openBooking()">Gửi yêu cầu</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        © 2025 Thuat's Goat Farm — Trang mẫu cho trang trại chăn nuôi dê. Muốn mình kết nối form gửi email hoặc thêm quản lý đàn không?
+    </footer>
+</div>
+
+<script>
+    function openBooking(){
+        const date = prompt('Chọn ngày (YYYY-MM-DD)');
+        if(!date) return;
+        const people = prompt('Số người?');
+        alert('Gửi yêu cầu thành công (demo): ' + date + ' cho ' + people + ' người. Chúng tôi sẽ liên hệ lại.');
+    }
+</script>
+</body>
+</html>
