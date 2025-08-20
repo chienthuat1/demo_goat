@@ -148,7 +148,7 @@
       if(!goat) throw new Error('Không có dữ liệu con dê.');
 
       // hero image
-      hero.innerHTML = `<img src="${goat.img_url}" alt="Goat ${goat.id_goat}"><div class="overlay"><h2>Dê #${goat.id_goat} <small style="opacity:.9">(ID)</small></h2><div style="height:6px"></div><em>${goat.description}</em></div>`;
+      hero.innerHTML = `<img src="${goat.img_url ? goat.img_url : 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=800&auto=format&fit=crop'}" alt="Goat ${goat.id_goat}"><div class="overlay"><h2>Dê #${goat.id_goat} <small style="opacity:.9">(ID)</small></h2><div style="height:6px"></div><em>${goat.description}</em></div>`;
 
       // meta pills
       metaRow.innerHTML = '';
