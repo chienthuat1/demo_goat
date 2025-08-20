@@ -75,7 +75,7 @@
 <script>
   async function loadGoats() {
     try {
-      const response = await fetch("https://demo-goat.onrender.com/goats/all");
+      const response = await fetch("https://demo-goat-cpbn.onrender.com/goats/all");
       const goats = await response.json();
       const list = document.getElementById("goat-list");
       list.innerHTML = "";
