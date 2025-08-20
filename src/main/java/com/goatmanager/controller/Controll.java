@@ -20,4 +20,12 @@ public class Controll {
     public String index3() {
         return "test";
     }
+    @GetMapping("/test")
+    public String index4() {
+        return "animal/animal";
+    }
+    @GetMapping("/test1")
+    public String index5() {
+        return "animal/info_animal";
+    }
 }
