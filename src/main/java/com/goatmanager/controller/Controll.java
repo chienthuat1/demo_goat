@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @CrossOrigin(origins = "*")
 @Controller
-@RequestMapping("/index")
 public class Controll {
     @GetMapping("/demo")
     public String index() {
@@ -16,7 +15,7 @@ public class Controll {
     public String index2() {
         return "goats";
     }
-    @GetMapping("/animal")
+    @GetMapping("/")
     public String index3() {
         return "test";
     }
